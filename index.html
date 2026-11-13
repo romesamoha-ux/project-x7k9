@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Книга, которая учит</title>
+    
+    <!-- Подключение PWA (Progressive Web App) -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#245b47">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Подключение стилей -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <main>
+        <header>
+            <span>КНИГА → ДЕЙСТВИЕ</span>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <!-- ИЗМЕНЕНО: onclick="toggleToc()" вместо go('toc') -->
+                <span id="toc-btn" style="cursor: pointer; font-weight: bold; color: #245b47; display: none;" onclick="toggleToc()">Оглавление ☰</span>
+                <!-- ИЗМЕНЕНО: Версия обновлена до 1.4 -->
+                <span class="pill">Прототип v1.7</span>
+            </div>
+        </header>
+        
+        <!-- Сюда JS будет вставлять экраны -->
+        <div id="app"></div>
+    </main>
+
+    <div class="bottom">Одна книга. Одна цель. Реальные действия.</div>
+
+    <!-- Логика приложения -->
+    <script src="js/app.js"></script>
+    
+    <!-- Регистрация Service Worker для PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('✅ Service Worker зарегистрирован:', registration))
+                    .catch(error => console.log('❌ Ошибка регистрации Service Worker:', error));
+            });
+        }
+    </script>
+</body>
+</html>
